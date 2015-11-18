@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using IdentityServer3.AccessTokenValidation;
 
@@ -12,12 +11,16 @@ namespace SampleAspNetWebApi
     {
         public void Configuration(IAppBuilder app)
         {
-            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+            JwtSecurityTokenHandler.InboundClaimTypeMap.Clear();
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
                 {
                     Authority = "https://localhost:44333/core",
-                    RequiredScopes = new[] { "write" }
+                    RequiredScopes = new[] { "write" },
+
+                    // client credentials for the introspection endpoint
+                    ClientId = "write",
+                    ClientSecret = "secret"
                 });
 
             app.UseWebApi(WebApiConfig.Register());
