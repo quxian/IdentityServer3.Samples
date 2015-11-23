@@ -6,7 +6,6 @@ using Sample;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 [assembly: OwinStartup(typeof(MVC_OWIN_Client.Startup))]
 
@@ -19,38 +18,40 @@ namespace MVC_OWIN_Client
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = "Cookies"
-            });
+                {
+                    AuthenticationType = "Cookies"
+                });
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
-            {
-                ClientId = "implicitclient",
-                Authority = Constants.BaseAddress,
-                RedirectUri = "https://localhost:44301/",
-                ResponseType = "id_token token",
-                Scope = "openid email write",
-
-                UseTokenLifetime = false,
-                SignInAsAuthenticationType = "Cookies",
-
-                Notifications = new OpenIdConnectAuthenticationNotifications
                 {
-                    SecurityTokenValidated = n =>
+                    ClientId = "implicitclient",
+                    Authority = Constants.BaseAddress,
+                    RedirectUri = "http://localhost:2671/",
+                    ResponseType = "id_token token",
+                    Scope = "openid email write",
+
+                    SignInAsAuthenticationType = "Cookies",
+
+
+
+
+
+
+                    Notifications = new OpenIdConnectAuthenticationNotifications
                     {
-                        var token = n.ProtocolMessage.AccessToken;
+                        SecurityTokenValidated = async n =>
+                            {
+                                var token = n.ProtocolMessage.AccessToken;
 
-                        // persist access token in cookie
-                        if (!string.IsNullOrEmpty(token))
-                        {
-                            n.AuthenticationTicket.Identity.AddClaim(
-                                new Claim("access_token", token));
-                        }
-
-                        return Task.FromResult(0);
+                                // persist access token in cookie
+                                if (!string.IsNullOrEmpty(token))
+                                {
+                                    n.AuthenticationTicket.Identity.AddClaim(
+                                        new Claim("access_token", token));
+                                }
+                            }
                     }
-                }
-            });
+                });
         }
     }
 }
