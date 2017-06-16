@@ -25,18 +25,13 @@ namespace MVC_OWIN_Client.Controllers
 
             if (token != null)
             {
-                ViewBag.Token = token.Value;
+                ViewData["access_token"] = token.Value;
             }
 
             return View();
         }
-
-        public ActionResult Signout()
-        {
-            Request.GetOwinContext().Authentication.SignOut();
-            return Redirect("/");
-        }
-
+        
+        [Authorize]
         public async Task<ActionResult> CallApi()
         {
             var token = (User as ClaimsPrincipal).FindFirst("access_token").Value;
@@ -48,6 +43,13 @@ namespace MVC_OWIN_Client.Controllers
             ViewBag.Json = JArray.Parse(result.ToString());
 
             return View();
+        }
+
+
+        public ActionResult Signout()
+        {
+            Request.GetOwinContext().Authentication.SignOut();
+            return Redirect("/");
         }
 
         public void SignoutCleanup(string sid)

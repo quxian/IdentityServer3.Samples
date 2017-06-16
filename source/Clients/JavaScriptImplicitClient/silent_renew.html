@@ -4,10 +4,9 @@
     <title></title>
 </head>
 <body>
-    <script src="oidc.js"></script>
+    <script src="oidc-client.js"></script>
     <script>
-        var mgr = new OidcTokenManager();
-        mgr.processTokenCallbackSilent();
+        new Oidc.UserManager().signinSilentCallback();
     </script>
 </body>
 </html>

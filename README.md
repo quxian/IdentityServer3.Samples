@@ -1,13 +1,13 @@
 IdentityServer3 Samples
 ======================================
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/IdentityServer/IdentityServer3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/JoinChat.svg)](https://gitter.im/IdentityServer/IdentityServer3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-#### ASP.NET 5 Hosting Sample
-[link](https://github.com/IdentityServer/IdentityServer3.Samples/tree/master/source/AspNet5Host)
+#### ASP.NET Core Hosting Sample
+[link](https://github.com/IdentityServer/IdentityServer3.Samples/tree/master/source/AspNetCore)
 
 #### MVC Authentication walk-through [link](https://github.com/IdentityServer/IdentityServer3.Samples/tree/master/source/MVC%20Authentication)
-Step by step tutorial on how to use identity server to provide authentication services to an MVC application and a Web API. See [here](https://github.com/IdentityServer/IdentityServer3/wiki/Getting-started) for instructions.
+Step by step tutorial on how to use identity server to provide authentication services to an MVC application and a Web API. See [here](https://identityserver.github.io/Documentation/docsv2/overview/mvcGettingStarted.html) for instructions.
 
 #### Clients [link](https://github.com/IdentityServer/IdentityServer3.Samples/tree/master/source/Clients)
 Sample clients and API for: client credentials, resource owner flow, code flow, form post, native and JavaScript implicit flow, WS-Federation and OpenID Connect Katana middleware.
@@ -54,3 +54,6 @@ Sample to illustrate how add support for non-standard grant types at the token e
 #### Logging
 Sample to illustrate how to use IdentityServer logging in custom services (e.g. a custom user service) as well as how to 
 add a custom logging sink. 
+
+#### Xamarin samples
+[link](https://github.com/IdentityServer/IdentityServer3.Samples/tree/master/source/Xamarin)

@@ -8,6 +8,7 @@ using IdentityServer3.EntityFramework;
 using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.InMemory;
+using IdentityServer3.Host.Config;
 
 namespace SelfHost.Config
 {
@@ -18,6 +19,7 @@ namespace SelfHost.Config
             var efConfig = new EntityFrameworkServiceOptions
             {
                 ConnectionString = connString,
+                //SynchronousReads = true
             };
 
             // these two calls just pre-populate the test DB from the in-memory config
@@ -28,6 +30,9 @@ namespace SelfHost.Config
 
             factory.RegisterConfigurationServices(efConfig);
             factory.RegisterOperationalServices(efConfig);
+
+            factory.ConfigureClientStoreCache();
+            factory.ConfigureScopeStoreCache();
 
             factory.UseInMemoryUsers(Users.Get());
 

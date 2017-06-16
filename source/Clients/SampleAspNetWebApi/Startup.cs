@@ -1,7 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using IdentityServer3.AccessTokenValidation;
+using Microsoft.Owin;
 using Owin;
+using Sample;
 using System.IdentityModel.Tokens;
-using IdentityServer3.AccessTokenValidation;
 
 [assembly: OwinStartup(typeof(SampleAspNetWebApi.Startup))]
 
@@ -15,7 +16,7 @@ namespace SampleAspNetWebApi
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
                 {
-                    Authority = "https://localhost:44333/core",
+                    Authority = Constants.BaseAddress,
                     RequiredScopes = new[] { "write" },
 
                     // client credentials for the introspection endpoint
